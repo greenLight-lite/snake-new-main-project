@@ -70,6 +70,7 @@ let speedY = 0
 let speedX = 0
 let snake: Sprite[] = []
 let mySprite: Sprite = null
+tiles.setCurrentTilemap(tilemap`level4`)
 mySprite = sprites.create(img`
     6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
     6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 

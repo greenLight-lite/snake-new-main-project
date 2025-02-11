@@ -108,7 +108,7 @@ mySprite = sprites.create(img`
     6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
     `, SpriteKind.Player)
 mySprite.setFlag(SpriteFlag.AutoDestroy, true)
-mySprite.setPosition(24, 8)
+mySprite.setPosition(25, 8)
 snake.push(mySprite)
 speedX = 1
 speedY = 0

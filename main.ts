@@ -144,7 +144,7 @@ forever(function () {
     y = snake[snake.length - 1].y + 15 * speedY
     mySprite.setPosition(x, y)
     snake.push(mySprite)
-    if (snake.length == 80) {
+    if (snake.length == 70) {
         game.over(true)
     }
     pause(200)

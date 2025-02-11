@@ -53,6 +53,28 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
         speedY = 1
     }
 })
+function snakeColor (pink: Image, green: Image) {
+    input2 = game.askForNumber("Pink for 1 and 2 for green", 1)
+    if (input2 == 1) {
+        mySprite = sprites.create(pink, SpriteKind.Player)
+        mySprite.setFlag(SpriteFlag.AutoDestroy, true)
+        mySprite.setPosition(8, 8)
+        snake.push(mySprite)
+        mySprite = sprites.create(pink, SpriteKind.Player)
+        mySprite.setFlag(SpriteFlag.AutoDestroy, true)
+        mySprite.setPosition(24, 8)
+        snake.push(mySprite)
+    } else if (input2 == 2) {
+        mySprite = sprites.create(green, SpriteKind.Player)
+        mySprite.setFlag(SpriteFlag.AutoDestroy, true)
+        mySprite.setPosition(8, 8)
+        snake.push(mySprite)
+        mySprite = sprites.create(green, SpriteKind.Player)
+        mySprite.setFlag(SpriteFlag.AutoDestroy, true)
+        mySprite.setPosition(24, 8)
+        snake.push(mySprite)
+    }
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     otherSprite.destroy()
     growth = 1
@@ -62,57 +84,51 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
 sprites.onDestroyed(SpriteKind.Player, function (sprite) {
     game.over(false)
 })
+let input2 = 0
+let snake: Sprite[] = []
 let y = 0
 let x = 0
 let isEmptyPosition = false
+let mySprite: Sprite = null
 let growth = 0
 let speedY = 0
 let speedX = 0
-let snake: Sprite[] = []
-let mySprite: Sprite = null
-mySprite = sprites.create(img`
-    6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-    `, SpriteKind.Player)
-mySprite.setFlag(SpriteFlag.AutoDestroy, true)
-mySprite.setPosition(8, 8)
-snake.push(mySprite)
-mySprite = sprites.create(img`
-    6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
-    6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-    `, SpriteKind.Player)
-mySprite.setFlag(SpriteFlag.AutoDestroy, true)
-mySprite.setPosition(24, 8)
-snake.push(mySprite)
 speedX = 1
 speedY = 0
 growth = 0
+snakeColor(img`
+    a a a a a a a a a a a a a a a a 
+    a 3 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
+    a 3 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
+    a 3 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
+    a 3 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
+    a 3 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
+    a 3 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
+    a 3 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
+    a 3 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
+    a 3 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
+    a 3 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
+    a 3 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
+    a 3 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
+    a 3 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
+    a a a a a a a a a a a a a a a a 
+    `, img`
+    6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
+    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
+    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
+    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
+    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
+    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
+    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
+    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
+    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
+    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
+    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
+    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
+    6 7 7 7 7 7 7 7 7 7 7 7 7 7 7 6 
+    6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+    `)
 spawnFood()
 info.setScore(0)
 pause(2000)

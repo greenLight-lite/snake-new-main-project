@@ -93,6 +93,7 @@ let mySprite: Sprite = null
 let growth = 0
 let speedY = 0
 let speedX = 0
+tiles.setCurrentTilemap(tilemap`level2`)
 speedX = 1
 speedY = 0
 growth = 0
